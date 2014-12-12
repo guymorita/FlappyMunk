@@ -31,6 +31,7 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
     var score:Int!
     
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var finalScoreView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,11 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
         
         score = 0
         
+        finalScoreView.layer.cornerRadius = 10.0
+        finalScoreView.layer.borderColor = UIColor.grayColor().CGColor
+        finalScoreView.layer.borderWidth = 2.0
+        finalScoreView.hidden = true
+        
         skView.presentScene(scene)
     }
     
@@ -62,9 +68,8 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
     }
     
     func gameOver(gameScene: GameScene) {
-        score = 0
-        updateScoreLabel()
-        scene.setPositionsForNewGame()
+        scene.view?.paused = true
+        scene.gameActive = false
     }
     
     func updateScoreLabel() {
@@ -73,19 +78,23 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
 
     func animationScoreLabel() {
         var animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.toValue = NSNumber(float: 0.9)
+        animation.toValue = NSNumber(float: 0.8)
         animation.duration = 0.3
         animation.autoreverses = true
         scoreLabel.layer.addAnimation(animation, forKey: nil)
     }
     
     @IBAction func didTap(sender: UITapGestureRecognizer) {
-        scene.popChippy()
-        scene.playSound("jump.wav")
-    }
-
-    override func shouldAutorotate() -> Bool {
-        return true
+        if scene.gameActive == true {
+            scene.popChippy()
+            scene.playSound("jump.wav")
+        } else {
+            score = 0
+            updateScoreLabel()
+            scene.gameActive = true
+            scene.view?.paused = false
+            scene.setPositionsForNewGame()
+        }
     }
 
     override func supportedInterfaceOrientations() -> Int {

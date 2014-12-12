@@ -25,8 +25,11 @@ protocol FlappyMunkDelegate {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var chippy: SKSpriteNode!
+    var barriers: Array<SKSpriteNode>!
     var delegateFlappy: FlappyMunkDelegate?
     var cityBackground: SKSpriteNode!
+    var gameActive: Bool!
+    var startTime: Int!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
@@ -34,6 +37,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
+
+        gameActive = true
+        barriers = Array<SKSpriteNode>()
+        startTime = Int(CACurrentMediaTime())
         let background = SKSpriteNode(color: skyBlue, size: self.frame.size)
         background.anchorPoint = CGPoint(x: 0, y: 0)
         addChild(background)
@@ -59,67 +66,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ground.physicsBody?.contactTestBitMask = protagonist
 
         addChild(ground)
-
+        
+        let smokeO = SKSpriteNode()
+        let circleNode = SKShapeNode(circleOfRadius: 10.0)
+        
+        circleNode.strokeColor = UIColor.whiteColor()
+        circleNode.fillColor = UIColor.whiteColor()
+        circleNode.lineWidth = 5
+        smokeO.addChild(circleNode)
+        smokeO.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
+        addChild(smokeO)
+        
+        self.physicsWorld.gravity = CGVectorMake(0.0, -6.0)
+        self.physicsWorld.contactDelegate = self
+    
         addChippy()
-    }
-    
-    func initiateMovingBackground() {
-        cityBackground.position = CGPoint(x:CGRectGetMidX(self.frame) + 280, y:CGRectGetMinY(self.frame)+180)
-
-    }
-    
-    func setPositionsForNewGame() {
-        initiateMovingBackground()
-        setChippyPosition()
     }
     
     func addChippy() {
         chippy = SKSpriteNode(imageNamed:"flying_chippy")
         chippy.xScale = 0.16
         chippy.yScale = 0.16
+        
+        setChippyPosition()
+        
+        addChild(chippy)
+    }
+    
+    func initiateMovingBackground() {
+        cityBackground.position = CGPoint(x:CGRectGetMidX(self.frame) + 280, y:CGRectGetMinY(self.frame)+180)
+    }
+    
+    func setPositionsForNewGame() {
+        chippy.physicsBody?.dynamic = false
+        chippy.physicsBody = nil
+        
+        for (idx, barrier) in enumerate(barriers) {
+            barrier.physicsBody?.dynamic = false
+            barrier.physicsBody = nil
+            removeChildrenInArray([barrier])
+        }
+        initiateMovingBackground()
+        setChippyPosition()
+    }
 
-
+    
+    func setChippyPosition() {
+        startTime = Int(CACurrentMediaTime())
         chippy.physicsBody = SKPhysicsBody(rectangleOfSize: chippy.size)
         chippy.physicsBody?.dynamic = true
         chippy.physicsBody?.categoryBitMask = protagonist
         chippy.physicsBody?.contactTestBitMask = barrier
-        
-        self.physicsWorld.gravity = CGVectorMake(0.0, -6.0)
-        self.physicsWorld.contactDelegate = self
-        
-        setChippyPosition()
-        
-        self.addChild(chippy)
-    }
-    
-    func setChippyPosition() {
-        let chippyPosition = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame))
-        chippy.position = chippyPosition
+        chippy.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
     }
     
     override func update(currentTime: CFTimeInterval) {
         let curTimeInt = Int(currentTime)
-        if curTime == 0 || curTime < curTimeInt - 2 {
-            if curTime != 0 {
+        
+        if curTime < curTimeInt - 2 {
+            if curTime != 0 && startTime < curTimeInt - 2 {
                 delegateFlappy?.gamePointScored(self)
             }
             curTime = curTimeInt
             addClouds()
-
         }
+        
     }
     
     func playSound(sound: String) {
         runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didEndContact(contact: SKPhysicsContact) {
         delegateFlappy?.gameOver(self)
     }
     
     
     func popChippy() {
-        
         chippy.physicsBody?.velocity = CGVectorMake(0.0, 400.0)
         
         let action = SKAction.rotateToAngle(CGFloat(M_PI*0.25), duration:0.3, shortestUnitArc: true)
@@ -131,7 +154,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let action = SKAction.rotateToAngle(CGFloat(M_PI*1.75), duration: 1.0, shortestUnitArc: true)
         chippy.runAction(action)
     }
-    
     
     func addClouds() {
         let randomHeight = arc4random_uniform(200)
@@ -171,6 +193,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         building.physicsBody?.contactTestBitMask = protagonist
         building.physicsBody?.collisionBitMask = 0
         building.physicsBody?.linearDamping = 0.0
+        
+        self.barriers.append(cloud)
+        self.barriers.append(building)
     }
    
 }

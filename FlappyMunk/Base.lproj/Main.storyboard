@@ -32,10 +32,20 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEy-Fp-gBP" userLabel="Final Score">
+                                <rect key="frame" x="174.5" y="105" width="250" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="7z2-xi-NWE"/>
+                                    <constraint firstAttribute="width" constant="250" id="xSD-mb-F3q"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="NEy-Fp-gBP" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="85" id="NOU-nJ-aW5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lbo-wN-2jm" secondAttribute="trailing" constant="25" id="PTS-B6-Pf3"/>
+                            <constraint firstAttribute="centerX" secondItem="NEy-Fp-gBP" secondAttribute="centerX" id="eib-bw-V52"/>
                             <constraint firstItem="lbo-wN-2jm" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="wqx-1z-qIA"/>
                         </constraints>
                         <connections>
@@ -43,6 +53,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="finalScoreView" destination="NEy-Fp-gBP" id="PWA-h5-Vdo"/>
                         <outlet property="scoreLabel" destination="lbo-wN-2jm" id="oTr-XY-Wh4"/>
                     </connections>
                 </viewController>
