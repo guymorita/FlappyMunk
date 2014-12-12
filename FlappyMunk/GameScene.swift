@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let moveCityBackground = SKAction.moveByX(-5.0, y: 0, duration: 1.0)
         let moveBackgroundForever = SKAction.repeatActionForever(moveCityBackground)
         cityBackground.runAction(moveBackgroundForever)
-        initiateMovingBackground()
+        resetBackgroundPosition()
         
         self.addChild(cityBackground)
         
@@ -67,19 +67,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         addChild(ground)
         
-        let smokeO = SKSpriteNode()
-        let circleNode = SKShapeNode(circleOfRadius: 10.0)
-        
-        circleNode.strokeColor = UIColor.whiteColor()
-        circleNode.fillColor = UIColor.whiteColor()
-        circleNode.lineWidth = 5
-        smokeO.addChild(circleNode)
-        smokeO.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
-        addChild(smokeO)
-        
         self.physicsWorld.gravity = CGVectorMake(0.0, -6.0)
         self.physicsWorld.contactDelegate = self
-    
+        
         addChippy()
     }
     
@@ -93,7 +83,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(chippy)
     }
     
-    func initiateMovingBackground() {
+    func addSmoke() {
+        let smokeO = SKSpriteNode()
+        let circleNode = SKShapeNode(circleOfRadius: 5.0)
+        
+        circleNode.strokeColor = UIColor.whiteColor()
+        circleNode.fillColor = UIColor.whiteColor()
+        circleNode.lineWidth = 5
+        smokeO.addChild(circleNode)
+        smokeO.position = CGPointMake(chippy.position.x - 15, chippy.position.y)
+        addChild(smokeO)
+        moveSmoke(smokeO)
+    }
+    
+    func moveSmoke(smoke: SKSpriteNode) {
+        let currentPosition = smoke.position
+        let randX = CGFloat(arc4random_uniform(80))
+        let randY = CGFloat(arc4random_uniform(100)) + currentPosition.y
+        smoke.runAction(SKAction.scaleTo(3.0, duration: 1.0))
+        smoke.runAction(SKAction.fadeAlphaTo(0.0, duration: 1.0))
+        smoke.runAction(SKAction.moveTo(CGPointMake(-randX, randY), duration: 2.0))
+
+        var delta: Int64 = 4 * Int64(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, delta)
+        dispatch_after(time, dispatch_get_main_queue(), {
+            self.removeChildrenInArray([smoke])
+        });
+    }
+    
+    func resetBackgroundPosition() {
         cityBackground.position = CGPoint(x:CGRectGetMidX(self.frame) + 280, y:CGRectGetMinY(self.frame)+180)
     }
     
@@ -106,7 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             barrier.physicsBody = nil
             removeChildrenInArray([barrier])
         }
-        initiateMovingBackground()
+        resetBackgroundPosition()
         setChippyPosition()
     }
 
@@ -129,8 +147,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             curTime = curTimeInt
             addClouds()
+
         }
-        
+        if arc4random_uniform(10) == 1 {
+            addSmoke()
+        }
     }
     
     func playSound(sound: String) {
@@ -145,12 +166,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func popChippy() {
         chippy.physicsBody?.velocity = CGVectorMake(0.0, 400.0)
         
-        let action = SKAction.rotateToAngle(CGFloat(M_PI*0.25), duration:0.3, shortestUnitArc: true)
-        chippy.runAction(action)
-        runAction(SKAction.waitForDuration(0.3), completion: comp)
+        let rotateUpwards = SKAction.rotateToAngle(CGFloat(M_PI*0.25), duration:0.3, shortestUnitArc: true)
+        chippy.runAction(rotateUpwards)
+        runAction(SKAction.waitForDuration(0.3), completion: chippyRotatingForward)
     }
     
-    func comp() {
+    func chippyRotatingForward() {
         let action = SKAction.rotateToAngle(CGFloat(M_PI*1.75), duration: 1.0, shortestUnitArc: true)
         chippy.runAction(action)
     }
