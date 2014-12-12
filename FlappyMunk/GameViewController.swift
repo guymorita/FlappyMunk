@@ -25,25 +25,63 @@ extension SKNode {
     }
 }
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecognizerDelegate {
+    
+    var scene:GameScene!
+    var score:Int!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
-            // Configure the view.
-            let skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
-            skView.presentScene(scene)
-        }
+        // Configure the view.
+
+        let skView = self.view as SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        
+        scene = GameScene(size: skView.bounds.size)
+        scene.scaleMode = .AspectFill
+        scene.delegateFlappy = self
+        
+        score = 0
+        
+        skView.presentScene(scene)
+    }
+    
+    func gamePointScored(gameScene: GameScene) {
+        score = score + 1
+        updateScoreLabel()
+        animationScoreLabel()
+    }
+    
+    func gameOver(gameScene: GameScene) {
+        score = 0
+        updateScoreLabel()
+        scene.setPositionsForNewGame()
+    }
+    
+    func updateScoreLabel() {
+        scoreLabel.text = "\(score)"
+    }
+
+    func animationScoreLabel() {
+        var animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.toValue = NSNumber(float: 0.9)
+        animation.duration = 0.3
+        animation.autoreverses = true
+        scoreLabel.layer.addAnimation(animation, forKey: nil)
+    }
+    
+    @IBAction func didTap(sender: UITapGestureRecognizer) {
+        scene.popChippy()
+        scene.playSound("jump.wav")
     }
 
     override func shouldAutorotate() -> Bool {

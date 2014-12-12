@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA8B47EA1A3A7F1C0092CA7E /* column_big.png in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47E91A3A7F1C0092CA7E /* column_big.png */; };
+		BA8B47ED1A3A82450092CA7E /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47EC1A3A82450092CA7E /* jump.wav */; };
+		BA8B47F21A3A8F390092CA7E /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */; };
+		BA8B47F31A3A8F3C0092CA7E /* OpenSans-CondLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47F01A3A8EA00092CA7E /* OpenSans-CondLight.ttf */; };
+		BA8B47F41A3A8F3F0092CA7E /* OpenSans-CondLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47F11A3A8EA00092CA7E /* OpenSans-CondLightItalic.ttf */; };
 		BABC40451A3A237D0076D525 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABC40441A3A237D0076D525 /* AppDelegate.swift */; };
 		BABC40471A3A237D0076D525 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BABC40461A3A237D0076D525 /* GameScene.sks */; };
 		BABC40491A3A237D0076D525 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABC40481A3A237D0076D525 /* GameScene.swift */; };
 		BABC404B1A3A237D0076D525 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABC404A1A3A237D0076D525 /* GameViewController.swift */; };
 		BABC404E1A3A237D0076D525 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BABC404C1A3A237D0076D525 /* Main.storyboard */; };
-		BABC40501A3A237D0076D525 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABC404F1A3A237D0076D525 /* Images.xcassets */; };
 		BABC40531A3A237D0076D525 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BABC40511A3A237D0076D525 /* LaunchScreen.xib */; };
 		BABC405F1A3A237D0076D525 /* FlappyMunkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABC405E1A3A237D0076D525 /* FlappyMunkTests.swift */; };
+		BABC406A1A3A248A0076D525 /* flying_chippy.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC40691A3A248A0076D525 /* flying_chippy.png */; };
+		BABC406D1A3A3A1B0076D525 /* PipeDown.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC406B1A3A3A1B0076D525 /* PipeDown.png */; };
+		BABC406E1A3A3A1B0076D525 /* PipeUp.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC406C1A3A3A1B0076D525 /* PipeUp.png */; };
+		BABC40701A3A57780076D525 /* column.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC406F1A3A57780076D525 /* column.png */; };
+		BABC40731A3A5AFD0076D525 /* column_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC40711A3A5AFD0076D525 /* column_2x.png */; };
+		BABC40741A3A5AFD0076D525 /* landscape_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC40721A3A5AFD0076D525 /* landscape_2x.png */; };
+		BABC40A81A3A62AC0076D525 /* landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC40A71A3A62AC0076D525 /* landscape.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA8B47E91A3A7F1C0092CA7E /* column_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = column_big.png; sourceTree = "<group>"; };
+		BA8B47EC1A3A82450092CA7E /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondBold.ttf"; sourceTree = "<group>"; };
+		BA8B47F01A3A8EA00092CA7E /* OpenSans-CondLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondLight.ttf"; sourceTree = "<group>"; };
+		BA8B47F11A3A8EA00092CA7E /* OpenSans-CondLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondLightItalic.ttf"; sourceTree = "<group>"; };
 		BABC403F1A3A237D0076D525 /* FlappyMunk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyMunk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BABC40431A3A237D0076D525 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BABC40441A3A237D0076D525 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,11 +51,17 @@
 		BABC40481A3A237D0076D525 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		BABC404A1A3A237D0076D525 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		BABC404D1A3A237D0076D525 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BABC404F1A3A237D0076D525 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BABC40521A3A237D0076D525 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BABC40581A3A237D0076D525 /* FlappyMunkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlappyMunkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BABC405D1A3A237D0076D525 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BABC405E1A3A237D0076D525 /* FlappyMunkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyMunkTests.swift; sourceTree = "<group>"; };
+		BABC40691A3A248A0076D525 /* flying_chippy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flying_chippy.png; sourceTree = "<group>"; };
+		BABC406B1A3A3A1B0076D525 /* PipeDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PipeDown.png; sourceTree = "<group>"; };
+		BABC406C1A3A3A1B0076D525 /* PipeUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PipeUp.png; sourceTree = "<group>"; };
+		BABC406F1A3A57780076D525 /* column.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = column.png; sourceTree = "<group>"; };
+		BABC40711A3A5AFD0076D525 /* column_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = column_2x.png; sourceTree = "<group>"; };
+		BABC40721A3A5AFD0076D525 /* landscape_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_2x.png; sourceTree = "<group>"; };
+		BABC40A71A3A62AC0076D525 /* landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +82,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA8B47EB1A3A82390092CA7E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BA8B47EC1A3A82450092CA7E /* jump.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		BA8B47EE1A3A8E980092CA7E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */,
+				BA8B47F01A3A8EA00092CA7E /* OpenSans-CondLight.ttf */,
+				BA8B47F11A3A8EA00092CA7E /* OpenSans-CondLightItalic.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		BABC40361A3A237D0076D525 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +126,6 @@
 				BABC40481A3A237D0076D525 /* GameScene.swift */,
 				BABC404A1A3A237D0076D525 /* GameViewController.swift */,
 				BABC404C1A3A237D0076D525 /* Main.storyboard */,
-				BABC404F1A3A237D0076D525 /* Images.xcassets */,
 				BABC40511A3A237D0076D525 /* LaunchScreen.xib */,
 				BABC40421A3A237D0076D525 /* Supporting Files */,
 			);
@@ -96,6 +135,9 @@
 		BABC40421A3A237D0076D525 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BA8B47EE1A3A8E980092CA7E /* Fonts */,
+				BA8B47EB1A3A82390092CA7E /* Sounds */,
+				BABC40681A3A247B0076D525 /* Images */,
 				BABC40431A3A237D0076D525 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -116,6 +158,21 @@
 				BABC405D1A3A237D0076D525 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BABC40681A3A247B0076D525 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BABC40A71A3A62AC0076D525 /* landscape.png */,
+				BABC40711A3A5AFD0076D525 /* column_2x.png */,
+				BA8B47E91A3A7F1C0092CA7E /* column_big.png */,
+				BABC40721A3A5AFD0076D525 /* landscape_2x.png */,
+				BABC406F1A3A57780076D525 /* column.png */,
+				BABC406B1A3A3A1B0076D525 /* PipeDown.png */,
+				BABC406C1A3A3A1B0076D525 /* PipeUp.png */,
+				BABC40691A3A248A0076D525 /* flying_chippy.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,10 +255,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8B47ED1A3A82450092CA7E /* jump.wav in Resources */,
+				BABC406D1A3A3A1B0076D525 /* PipeDown.png in Resources */,
+				BA8B47F31A3A8F3C0092CA7E /* OpenSans-CondLight.ttf in Resources */,
+				BABC406A1A3A248A0076D525 /* flying_chippy.png in Resources */,
 				BABC40531A3A237D0076D525 /* LaunchScreen.xib in Resources */,
-				BABC40501A3A237D0076D525 /* Images.xcassets in Resources */,
 				BABC40471A3A237D0076D525 /* GameScene.sks in Resources */,
+				BABC406E1A3A3A1B0076D525 /* PipeUp.png in Resources */,
+				BABC40701A3A57780076D525 /* column.png in Resources */,
+				BA8B47F21A3A8F390092CA7E /* OpenSans-CondBold.ttf in Resources */,
+				BA8B47F41A3A8F3F0092CA7E /* OpenSans-CondLightItalic.ttf in Resources */,
+				BABC40741A3A5AFD0076D525 /* landscape_2x.png in Resources */,
+				BA8B47EA1A3A7F1C0092CA7E /* column_big.png in Resources */,
 				BABC404E1A3A237D0076D525 /* Main.storyboard in Resources */,
+				BABC40731A3A5AFD0076D525 /* column_2x.png in Resources */,
+				BABC40A81A3A62AC0076D525 /* landscape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +481,7 @@
 				BABC40641A3A237D0076D525 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BABC40651A3A237D0076D525 /* Build configuration list for PBXNativeTarget "FlappyMunkTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +490,7 @@
 				BABC40671A3A237D0076D525 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
