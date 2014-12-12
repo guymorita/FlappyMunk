@@ -29,6 +29,7 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
     
     var scene:GameScene!
     var score:Int!
+    var bestScore:Int!
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var finalScoreView: UIView!
@@ -53,12 +54,24 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
         
         score = 0
         
+        findBestScore()
+        
         finalScoreView.layer.cornerRadius = 10.0
         finalScoreView.layer.borderColor = UIColor.grayColor().CGColor
         finalScoreView.layer.borderWidth = 2.0
         finalScoreView.hidden = true
         
         skView.presentScene(scene)
+        
+    }
+    
+    func findBestScore() {
+        var bestScoreOutput: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("bestScore")
+        if bestScoreOutput != nil {
+            bestScore = bestScoreOutput as Int
+        } else {
+            bestScore = 0
+        }
     }
     
     func gamePointScored(gameScene: GameScene) {
@@ -68,6 +81,11 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
     }
     
     func gameOver(gameScene: GameScene) {
+        if score > bestScore {
+            bestScore = score
+            NSUserDefaults.standardUserDefaults().setObject(bestScore, forKey: "bestScore")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
         scene.view?.paused = true
         scene.gameActive = false
     }
@@ -94,6 +112,13 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
             scene.gameActive = true
             scene.view?.paused = false
             scene.setPositionsForNewGame()
+        }
+    }
+
+    
+    @IBAction func didTwoFingerTouch(sender: UITapGestureRecognizer) {
+        if scene.gameActive == true {
+            scene.flipChippy()
         }
     }
 

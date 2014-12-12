@@ -13,7 +13,7 @@ var curTime = 0
 var barrier: UInt32 = 0x1 << 1
 var protagonist: UInt32 = 0x1 << 2
 
-var skyBlue:UIColor = UIColor(red: CGFloat(38.0/255.0), green: CGFloat(143.0/255.0), blue: CGFloat(222.0/255.0), alpha: CGFloat(1.0))
+var skyBlue:UIColor = UIColor(red: CGFloat(118.0/255.0), green: CGFloat(200.0/255.0), blue: CGFloat(231.0/255.0), alpha: CGFloat(1.0))
 
 
 protocol FlappyMunkDelegate {
@@ -152,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if arc4random_uniform(10) == 1 {
             addSmoke()
         }
+
     }
     
     func playSound(sound: String) {
@@ -174,6 +175,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func chippyRotatingForward() {
         let action = SKAction.rotateToAngle(CGFloat(M_PI*1.75), duration: 1.0, shortestUnitArc: true)
         chippy.runAction(action)
+    }
+    func flipChippy() {
+        chippy.removeAllActions()
+        let backFlip = SKAction.rotateByAngle(CGFloat(M_PI*2), duration:0.5)
+        chippy.runAction(backFlip)
+
     }
     
     func addClouds() {

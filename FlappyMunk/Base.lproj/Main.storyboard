@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEy-Fp-gBP" userLabel="Final Score">
-                                <rect key="frame" x="174.5" y="105" width="250" height="150"/>
+                                <rect key="frame" x="175" y="105" width="250" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="7z2-xi-NWE"/>
@@ -50,6 +50,7 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="dsa-qL-wCM" appends="YES" id="s3b-gp-To1"/>
+                            <outletCollection property="gestureRecognizers" destination="fcs-k3-1Nc" appends="YES" id="sKY-JO-jJ8"/>
                         </connections>
                     </view>
                     <connections>
@@ -62,6 +63,12 @@
                     <connections>
                         <action selector="didTap:" destination="LVB-YS-i5n" id="Bju-FH-JkC"/>
                         <outlet property="delegate" destination="LVB-YS-i5n" id="xmq-lg-5Ne"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTouchesRequired="2" id="fcs-k3-1Nc">
+                    <connections>
+                        <action selector="didTwoFingerTouch:" destination="LVB-YS-i5n" id="HB6-8E-t3R"/>
+                        <outlet property="delegate" destination="LVB-YS-i5n" id="dy9-tB-2ss"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
