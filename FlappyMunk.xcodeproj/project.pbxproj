@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA3DB1F71A3BA91B002C2955 /* munk-reg.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1EB1A3BA91B002C2955 /* munk-reg.png */; };
+		BA3DB1F81A3BA91B002C2955 /* munk-dizzy.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1EC1A3BA91B002C2955 /* munk-dizzy.png */; };
+		BA3DB1F91A3BA91B002C2955 /* munk-halloween.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1ED1A3BA91B002C2955 /* munk-halloween.png */; };
+		BA3DB1FA1A3BA91B002C2955 /* munk-holiday.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1EE1A3BA91B002C2955 /* munk-holiday.png */; };
+		BA3DB1FB1A3BA91B002C2955 /* munk-fear.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1EF1A3BA91B002C2955 /* munk-fear.png */; };
+		BA3DB1FC1A3BA91B002C2955 /* munk-yahoo.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F01A3BA91B002C2955 /* munk-yahoo.png */; };
+		BA3DB1FD1A3BA91B002C2955 /* munk-suit.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F11A3BA91B002C2955 /* munk-suit.png */; };
+		BA3DB1FE1A3BA91B002C2955 /* munk-kim.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F21A3BA91B002C2955 /* munk-kim.png */; };
+		BA3DB1FF1A3BA91B002C2955 /* munk-hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F31A3BA91B002C2955 /* munk-hotel.png */; };
+		BA3DB2001A3BA91B002C2955 /* munk-sick.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F41A3BA91B002C2955 /* munk-sick.png */; };
+		BA3DB2011A3BA91B002C2955 /* munk-map.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F51A3BA91B002C2955 /* munk-map.png */; };
+		BA3DB2021A3BA91B002C2955 /* munk-yc.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3DB1F61A3BA91B002C2955 /* munk-yc.png */; };
 		BA8B47EA1A3A7F1C0092CA7E /* column_big.png in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47E91A3A7F1C0092CA7E /* column_big.png */; };
 		BA8B47ED1A3A82450092CA7E /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47EC1A3A82450092CA7E /* jump.wav */; };
 		BA8B47F21A3A8F390092CA7E /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */; };
@@ -37,6 +49,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA3DB1E71A3B95F8002C2955 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		BA3DB1E81A3B95F8002C2955 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		BA3DB1E91A3B95F8002C2955 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		BA3DB1EB1A3BA91B002C2955 /* munk-reg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-reg.png"; sourceTree = "<group>"; };
+		BA3DB1EC1A3BA91B002C2955 /* munk-dizzy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-dizzy.png"; sourceTree = "<group>"; };
+		BA3DB1ED1A3BA91B002C2955 /* munk-halloween.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-halloween.png"; sourceTree = "<group>"; };
+		BA3DB1EE1A3BA91B002C2955 /* munk-holiday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-holiday.png"; sourceTree = "<group>"; };
+		BA3DB1EF1A3BA91B002C2955 /* munk-fear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-fear.png"; sourceTree = "<group>"; };
+		BA3DB1F01A3BA91B002C2955 /* munk-yahoo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-yahoo.png"; sourceTree = "<group>"; };
+		BA3DB1F11A3BA91B002C2955 /* munk-suit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-suit.png"; sourceTree = "<group>"; };
+		BA3DB1F21A3BA91B002C2955 /* munk-kim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-kim.png"; sourceTree = "<group>"; };
+		BA3DB1F31A3BA91B002C2955 /* munk-hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-hotel.png"; sourceTree = "<group>"; };
+		BA3DB1F41A3BA91B002C2955 /* munk-sick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-sick.png"; sourceTree = "<group>"; };
+		BA3DB1F51A3BA91B002C2955 /* munk-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-map.png"; sourceTree = "<group>"; };
+		BA3DB1F61A3BA91B002C2955 /* munk-yc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "munk-yc.png"; sourceTree = "<group>"; };
 		BA8B47E91A3A7F1C0092CA7E /* column_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = column_big.png; sourceTree = "<group>"; };
 		BA8B47EC1A3A82450092CA7E /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondBold.ttf"; sourceTree = "<group>"; };
@@ -78,6 +105,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA3DB1EA1A3BA910002C2955 /* chippy */ = {
+			isa = PBXGroup;
+			children = (
+				BA3DB1EB1A3BA91B002C2955 /* munk-reg.png */,
+				BA3DB1EC1A3BA91B002C2955 /* munk-dizzy.png */,
+				BA3DB1ED1A3BA91B002C2955 /* munk-halloween.png */,
+				BA3DB1EE1A3BA91B002C2955 /* munk-holiday.png */,
+				BA3DB1EF1A3BA91B002C2955 /* munk-fear.png */,
+				BA3DB1F01A3BA91B002C2955 /* munk-yahoo.png */,
+				BA3DB1F11A3BA91B002C2955 /* munk-suit.png */,
+				BA3DB1F21A3BA91B002C2955 /* munk-kim.png */,
+				BA3DB1F31A3BA91B002C2955 /* munk-hotel.png */,
+				BA3DB1F41A3BA91B002C2955 /* munk-sick.png */,
+				BA3DB1F51A3BA91B002C2955 /* munk-map.png */,
+				BA3DB1F61A3BA91B002C2955 /* munk-yc.png */,
+			);
+			name = chippy;
+			sourceTree = "<group>";
+		};
 		BA8B47EB1A3A82390092CA7E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +135,9 @@
 		BA8B47EE1A3A8E980092CA7E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				BA3DB1E71A3B95F8002C2955 /* OpenSans-Regular.ttf */,
+				BA3DB1E81A3B95F8002C2955 /* OpenSans-Semibold.ttf */,
+				BA3DB1E91A3B95F8002C2955 /* OpenSans-SemiboldItalic.ttf */,
 				BA8B47EF1A3A8EA00092CA7E /* OpenSans-CondBold.ttf */,
 				BA8B47F01A3A8EA00092CA7E /* OpenSans-CondLight.ttf */,
 				BA8B47F11A3A8EA00092CA7E /* OpenSans-CondLightItalic.ttf */,
@@ -160,6 +209,7 @@
 		BABC40681A3A247B0076D525 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BA3DB1EA1A3BA910002C2955 /* chippy */,
 				BABC40A71A3A62AC0076D525 /* landscape.png */,
 				BABC40711A3A5AFD0076D525 /* column_2x.png */,
 				BA8B47E91A3A7F1C0092CA7E /* column_big.png */,
@@ -254,14 +304,26 @@
 				BABC406A1A3A248A0076D525 /* flying_chippy.png in Resources */,
 				BAB196251A3AF198008F2CDB /* Images.xcassets in Resources */,
 				BABC40471A3A237D0076D525 /* GameScene.sks in Resources */,
+				BA3DB2011A3BA91B002C2955 /* munk-map.png in Resources */,
+				BA3DB2021A3BA91B002C2955 /* munk-yc.png in Resources */,
+				BA3DB1FE1A3BA91B002C2955 /* munk-kim.png in Resources */,
 				BA8B47F21A3A8F390092CA7E /* OpenSans-CondBold.ttf in Resources */,
+				BA3DB1FA1A3BA91B002C2955 /* munk-holiday.png in Resources */,
 				BA8B47F41A3A8F3F0092CA7E /* OpenSans-CondLightItalic.ttf in Resources */,
 				BABC40741A3A5AFD0076D525 /* landscape_2x.png in Resources */,
 				BA8B47EA1A3A7F1C0092CA7E /* column_big.png in Resources */,
+				BA3DB1F81A3BA91B002C2955 /* munk-dizzy.png in Resources */,
 				BABC404E1A3A237D0076D525 /* Main.storyboard in Resources */,
+				BA3DB1FC1A3BA91B002C2955 /* munk-yahoo.png in Resources */,
 				BABC40731A3A5AFD0076D525 /* column_2x.png in Resources */,
+				BA3DB2001A3BA91B002C2955 /* munk-sick.png in Resources */,
+				BA3DB1F91A3BA91B002C2955 /* munk-halloween.png in Resources */,
+				BA3DB1FB1A3BA91B002C2955 /* munk-fear.png in Resources */,
+				BA3DB1F71A3BA91B002C2955 /* munk-reg.png in Resources */,
+				BA3DB1FD1A3BA91B002C2955 /* munk-suit.png in Resources */,
 				BABC40A81A3A62AC0076D525 /* landscape.png in Resources */,
 				BAB1962B1A3B60FD008F2CDB /* Launch Screen.xib in Resources */,
+				BA3DB1FF1A3BA91B002C2955 /* munk-hotel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

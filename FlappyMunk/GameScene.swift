@@ -20,6 +20,8 @@ protocol FlappyMunkDelegate {
     func gamePointScored(gameScene: GameScene)
     
     func gameOver(gameScene: GameScene)
+    
+    func gameDidStart(gameScene: GameScene)
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -30,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var cityBackground: SKSpriteNode!
     var gameActive: Bool!
     var startTime: Int!
+    var initialPop: Bool!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
@@ -108,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var time = dispatch_time(DISPATCH_TIME_NOW, delta)
         dispatch_after(time, dispatch_get_main_queue(), {
             self.removeChildrenInArray([smoke])
-        });
+        })
     }
     
     func resetBackgroundPosition() {
@@ -116,6 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setPositionsForNewGame() {
+        delegateFlappy?.gameDidStart(self)
         chippy.physicsBody?.dynamic = false
         chippy.physicsBody = nil
         
@@ -136,6 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         chippy.physicsBody?.categoryBitMask = protagonist
         chippy.physicsBody?.contactTestBitMask = barrier
         chippy.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
+        initialPop = false
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -153,8 +158,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addSmoke()
         }
 
+
     }
-    
+
     func playSound(sound: String) {
         runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
@@ -162,7 +168,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didEndContact(contact: SKPhysicsContact) {
         delegateFlappy?.gameOver(self)
     }
-    
     
     func popChippy() {
         chippy.physicsBody?.velocity = CGVectorMake(0.0, 400.0)
@@ -180,7 +185,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         chippy.removeAllActions()
         let backFlip = SKAction.rotateByAngle(CGFloat(M_PI*2), duration:0.5)
         chippy.runAction(backFlip)
-
     }
     
     func addClouds() {
