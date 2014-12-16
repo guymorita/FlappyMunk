@@ -58,7 +58,6 @@ class GameViewController: UIViewController, FlappyMunkDelegate, UIGestureRecogni
             skView.showsNodeCount = true
         }
 
-        
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         

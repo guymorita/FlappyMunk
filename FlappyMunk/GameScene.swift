@@ -8,11 +8,12 @@
 
 import SpriteKit
 
+var screenSize = UIScreen.mainScreen().bounds.height
+var displaySizeDifferenceCoefficient:CGFloat = 0.2998
+var screenOffset = screenSize * displaySizeDifferenceCoefficient
 var pillarCoefficient = 50
-var curTime = 0
 var barrier: UInt32 = 0x1 << 1
 var protagonist: UInt32 = 0x1 << 2
-
 var skyBlue:UIColor = UIColor(red: CGFloat(118.0/255.0), green: CGFloat(200.0/255.0), blue: CGFloat(231.0/255.0), alpha: CGFloat(1.0))
 
 
@@ -24,15 +25,17 @@ protocol FlappyMunkDelegate {
     func gameDidStart(gameScene: GameScene)
 }
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var chippy: SKSpriteNode!
     var barriers: Array<SKSpriteNode>!
     var delegateFlappy: FlappyMunkDelegate?
-    var cityBackground: SKSpriteNode!
+    var cityMiddleground: SKSpriteNode!
     var gameActive: Bool!
     var startTime: Int!
-    var initialPop: Bool!
+    var scoreTime: Int!
+    var curDifficulty: CGFloat!
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
@@ -44,22 +47,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameActive = true
         barriers = Array<SKSpriteNode>()
         startTime = Int(CACurrentMediaTime())
+        scoreTime = 0
+        curDifficulty = 0.0
+        
+        setupEnvironment()
+    }
+    
+    // MARK: Environment
+    
+    func setupEnvironment() {
+        addBackgrond()
+        
+        addMiddleground()
+        
+        addGround()
+        
+        addPhysics()
+        
+        addChippy()
+    }
+    
+    func addBackgrond() {
         let background = SKSpriteNode(color: skyBlue, size: self.frame.size)
         background.anchorPoint = CGPoint(x: 0, y: 0)
         addChild(background)
+    }
+    
+    func addMiddleground() {
+        cityMiddleground = SKSpriteNode(imageNamed: "landscape")
+        cityMiddleground.xScale = screenOffset / 290
+        cityMiddleground.yScale = screenOffset / 290
+        let movecityMiddleground = SKAction.moveByX(-5.0, y: 0, duration: 1.0)
+        let moveBackgroundForever = SKAction.repeatActionForever(movecityMiddleground)
+        cityMiddleground.runAction(moveBackgroundForever)
+        resetCityMiddlegroundPosition()
         
-        cityBackground = SKSpriteNode(imageNamed: "landscape")
-        cityBackground.xScale = 0.7
-        cityBackground.yScale = 0.7
-        let moveCityBackground = SKAction.moveByX(-5.0, y: 0, duration: 1.0)
-        let moveBackgroundForever = SKAction.repeatActionForever(moveCityBackground)
-        cityBackground.runAction(moveBackgroundForever)
-        resetBackgroundPosition()
-        
-        self.addChild(cityBackground)
-        
+        self.addChild(cityMiddleground)
+
+    }
+    
+    func resetCityMiddlegroundPosition() {
+        cityMiddleground.position = CGPoint(x:CGRectGetMidX(self.frame) + 280, y:screenOffset*0.9)
+    }
+    
+    func addGround() {
         let ground = SKSpriteNode(color: UIColor.clearColor(), size: CGSizeMake(500, 50))
-        ground.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMinY(self.frame)+125)
+        ground.position = CGPoint(x:CGRectGetMidX(self.frame), y:screenOffset*0.9-57)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
         ground.physicsBody?.affectedByGravity = false
         ground.physicsBody?.dynamic = true
@@ -67,23 +100,96 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ground.physicsBody?.collisionBitMask = 0
         ground.physicsBody?.categoryBitMask = barrier
         ground.physicsBody?.contactTestBitMask = protagonist
-
-        addChild(ground)
         
+        addChild(ground)
+    }
+    
+    func addPhysics() {
         self.physicsWorld.gravity = CGVectorMake(0.0, -6.0)
         self.physicsWorld.contactDelegate = self
-        
-        addChippy()
     }
     
     func addChippy() {
         chippy = SKSpriteNode(imageNamed:"flying_chippy")
-        chippy.xScale = 0.16
-        chippy.yScale = 0.16
+        chippy.xScale = screenOffset / 1300
+        chippy.yScale = screenOffset / 1300
         
         setChippyPosition()
         
         addChild(chippy)
+    }
+    
+    func setChippyPosition() {
+        startTime = Int(CACurrentMediaTime())
+        chippy.physicsBody = SKPhysicsBody(rectangleOfSize: chippy.size)
+        chippy.physicsBody?.dynamic = true
+        chippy.physicsBody?.categoryBitMask = protagonist
+        chippy.physicsBody?.contactTestBitMask = barrier
+        chippy.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
+    }
+    
+    // MARK: Game Loop
+    
+    override func update(currentTime: CFTimeInterval) {
+        let curTimeInt = Int(currentTime)
+        let atLeastTwoSecondsHavePassed = scoreTime < curTimeInt - 2
+        
+        if atLeastTwoSecondsHavePassed {
+            
+            // score is based on how much time has passed, this is in line with the rate the pillars move
+            if scoreTime != 0 && atLeastTwoSecondsHavePassed {
+                delegateFlappy?.gamePointScored(self)
+            }
+            scoreTime = curTimeInt
+            curDifficulty = curDifficulty + 0.3
+            addPillars(curDifficulty)
+        }
+        
+        // randomly produces plane smoke
+        if arc4random_uniform(10) == 1 {
+            addSmoke()
+        }
+    }
+    
+    func addPillars(difficulty: CGFloat) {
+        let baseHeight = -CGFloat(screenOffset)
+        // primary adjustment that positions the bottom pillar at a normal position
+        let primaryAdjustment = baseHeight + CGFloat(arc4random_uniform(UInt32(screenOffset))) * 1.5
+        // makes the cap wider for smaller screens
+//        let smallScreenBoost = (667-screenSize) / 3.5
+        // slowly adds difficulty over time, making the gap more narrow
+        let difficultyOffset = (screenOffset/200) * difficulty
+        
+        let topPillar = addPillar()
+        let topPillarPos = CGPoint(x: CGRectGetMaxX(self.frame) + CGFloat(pillarCoefficient), y: primaryAdjustment + topPillar.size.height + screenOffset - difficultyOffset)
+        topPillar.position = topPillarPos
+        self.barriers.append(topPillar)
+
+        let bottomPillar = addPillar()
+        let bottomPillarPos = CGPoint(x: CGRectGetMaxX(self.frame) + CGFloat(pillarCoefficient), y: primaryAdjustment + difficultyOffset)
+        bottomPillar.position = bottomPillarPos
+        self.barriers.append(bottomPillar)
+    }
+    
+    
+    func addPillar() -> SKSpriteNode {
+        let pillar = SKSpriteNode(imageNamed: "column_big")
+        pillar.xScale = screenOffset / 680
+        pillar.yScale = screenOffset / 680
+        
+        self.addChild(pillar)
+        
+        pillar.physicsBody = SKPhysicsBody(rectangleOfSize: pillar.size)
+        pillar.physicsBody?.affectedByGravity = false
+        pillar.physicsBody?.dynamic = true
+        pillar.physicsBody?.mass = 1000.0
+        pillar.physicsBody?.velocity = CGVectorMake(-110, 0)
+        pillar.physicsBody?.categoryBitMask = barrier
+        pillar.physicsBody?.contactTestBitMask = protagonist
+        pillar.physicsBody?.collisionBitMask = 0
+        pillar.physicsBody?.linearDamping = 0.0
+        
+        return pillar
     }
     
     func addSmoke() {
@@ -114,11 +220,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
     }
     
-    func resetBackgroundPosition() {
-        cityBackground.position = CGPoint(x:CGRectGetMidX(self.frame) + 280, y:CGRectGetMinY(self.frame)+180)
-    }
+    // MARK: New Game
     
     func setPositionsForNewGame() {
+        scoreTime = 0
+        curDifficulty = 0.0
         delegateFlappy?.gameDidStart(self)
         chippy.physicsBody?.dynamic = false
         chippy.physicsBody = nil
@@ -128,38 +234,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             barrier.physicsBody = nil
             removeChildrenInArray([barrier])
         }
-        resetBackgroundPosition()
+        resetCityMiddlegroundPosition()
         setChippyPosition()
     }
-
     
-    func setChippyPosition() {
-        startTime = Int(CACurrentMediaTime())
-        chippy.physicsBody = SKPhysicsBody(rectangleOfSize: chippy.size)
-        chippy.physicsBody?.dynamic = true
-        chippy.physicsBody?.categoryBitMask = protagonist
-        chippy.physicsBody?.contactTestBitMask = barrier
-        chippy.position = CGPoint(x:CGRectGetMidX(self.frame) - 100, y:CGRectGetMidY(self.frame) + 100)
-        initialPop = false
-    }
-    
-    override func update(currentTime: CFTimeInterval) {
-        let curTimeInt = Int(currentTime)
-        
-        if curTime < curTimeInt - 2 {
-            if curTime != 0 && startTime < curTimeInt - 2 {
-                delegateFlappy?.gamePointScored(self)
-            }
-            curTime = curTimeInt
-            addClouds()
-
-        }
-        if arc4random_uniform(10) == 1 {
-            addSmoke()
-        }
-
-
-    }
+    // MARK: Actions
 
     func playSound(sound: String) {
         runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
@@ -185,49 +264,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         chippy.removeAllActions()
         let backFlip = SKAction.rotateByAngle(CGFloat(M_PI*2), duration:0.5)
         chippy.runAction(backFlip)
-    }
-    
-    func addClouds() {
-        let randomHeight = arc4random_uniform(200)
-        
-        let cloud = SKSpriteNode(imageNamed: "column_big")
-        cloud.xScale = 0.3
-        cloud.yScale = 0.3
-        let cloudPos = CGPoint(x:CGRectGetMaxX(self.frame) + CGFloat(pillarCoefficient), y:CGRectGetMaxY(self.frame) + 100 + CGFloat(randomHeight))
-        cloud.position = cloudPos
-        
-        self.addChild(cloud)
-        
-        cloud.physicsBody = SKPhysicsBody(rectangleOfSize: cloud.size)
-        cloud.physicsBody?.affectedByGravity = false
-        cloud.physicsBody?.velocity = CGVectorMake(-110, 0)
-        cloud.physicsBody?.dynamic = true
-        cloud.physicsBody?.mass = 1000.0
-        cloud.physicsBody?.categoryBitMask = barrier
-        cloud.physicsBody?.contactTestBitMask = protagonist
-        cloud.physicsBody?.collisionBitMask = 0
-        cloud.physicsBody?.linearDamping = 0.0
-        
-        let building = SKSpriteNode(imageNamed: "column_big")
-        building.xScale = 0.3
-        building.yScale = 0.3
-        let buildingPos = CGPoint(x: CGRectGetMaxX(self.frame) + CGFloat(pillarCoefficient), y: CGRectGetMinY(self.frame) - 200 + CGFloat(randomHeight))
-        building.position = buildingPos
-
-        self.addChild(building)
-        
-        building.physicsBody = SKPhysicsBody(rectangleOfSize: building.size)
-        building.physicsBody?.affectedByGravity = false
-        building.physicsBody?.dynamic = true
-        building.physicsBody?.mass = 1000.0
-        building.physicsBody?.velocity = CGVectorMake(-110, 0)
-        building.physicsBody?.categoryBitMask = barrier
-        building.physicsBody?.contactTestBitMask = protagonist
-        building.physicsBody?.collisionBitMask = 0
-        building.physicsBody?.linearDamping = 0.0
-        
-        self.barriers.append(cloud)
-        self.barriers.append(building)
     }
    
 }

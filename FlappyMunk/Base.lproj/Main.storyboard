@@ -140,7 +140,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h5-WF-WzR">
-                                <rect key="frame" x="211" y="339" width="178" height="70"/>
+                                <rect key="frame" x="211" y="430" width="178" height="70"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.56470588239999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-CondensedBold" family="Open Sans Condensed" pointSize="36"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
@@ -158,7 +158,7 @@
                             <constraint firstItem="NEy-Fp-gBP" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="100" id="NOU-nJ-aW5"/>
                             <constraint firstAttribute="centerX" secondItem="1h5-WF-WzR" secondAttribute="centerX" id="OnF-up-bnT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lbo-wN-2jm" secondAttribute="trailing" constant="25" id="PTS-B6-Pf3"/>
-                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="1h5-WF-WzR" secondAttribute="bottom" constant="191" id="Q4K-Fc-KaP"/>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="1h5-WF-WzR" secondAttribute="bottom" constant="100" id="Q4K-Fc-KaP"/>
                             <constraint firstAttribute="centerX" secondItem="NEy-Fp-gBP" secondAttribute="centerX" id="U8K-GO-y7y"/>
                             <constraint firstItem="lbo-wN-2jm" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="wqx-1z-qIA"/>
                         </constraints>
